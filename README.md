@@ -108,3 +108,10 @@ If an app get stuck and cannot be deleted, try:
 ```console
 argocd app terminate-op cert-manager-crd
 ```
+
+## ARGO
+
+```
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
