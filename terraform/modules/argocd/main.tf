@@ -29,10 +29,10 @@ resource "helm_release" "argocd" {
 
   set {
     name  = "server.image.tag"
-    value = "latest"
+    value = "v2.0.2"
   }
 
-#because I can't pass "- --insecure" directly using set{}
+  #because I can't pass "- --insecure" directly using set{}
   values = [
     file("${path.module}/chart/argocd/values.yaml")
   ]

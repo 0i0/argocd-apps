@@ -2,9 +2,29 @@
 
 ## Deploy AKS with Terrafom
 
+```
+az ad sp create-for-rbac --name="SPForTerraform" --role="Contributor" --scopes="/subscriptions/<subscription-id>"
+```
+
+
+
+```
+export ARM_SUBSCRIPTION_ID= <subscription-id>
+export ARM_CLIENT_ID= <appId>
+export ARM_CLIENT_SECRET= <password>
+export ARM_TENANT_ID= <tenant>
+```
+
+
+
+cd into the terraform folder
 ```console
-terraforn init
-terraforn apply -auto-approve
+terraform init
+terraform apply -auto-approve
+```
+
+```
+az aks get-credentials --resource-group argocd --name sm-aks
 ```
 
 The template will install AKS and call the ArgoCD module to install everything that is in this repo under the `/apps` folder, including `cert-manager` and `ingress-nginx`. To allow for the certificates creation, you need to map the ingress public IP to a real wildcard DNS record in a DNS zone (in Azure):
